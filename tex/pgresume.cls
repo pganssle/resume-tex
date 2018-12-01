@@ -3,7 +3,12 @@
 
 % Based on the article class
 \LoadClass{article}
-\usepackage[a4paper, margin=1.5cm]{geometry}
+
+% Configure margins
+\usepackage[a4paper,
+margin=1.5cm,
+top=2.5cm,
+headheight=2cm]{geometry}
 
 
 %%%%%%%%%
