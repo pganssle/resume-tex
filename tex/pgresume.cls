@@ -10,6 +10,11 @@ margin=1.5cm,
 top=2.5cm,
 headheight=2cm]{geometry}
 
+% Set up fonts
+\usepackage{fontspec}
+\setmainfont[
+    Ligatures=TeX,
+]{Frutiger Next Pro}
 
 %%%%%%%%%
 % Set up header
