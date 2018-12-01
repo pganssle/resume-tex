@@ -3,6 +3,7 @@
 
 % Based on the article class
 \LoadClass{article}
+\usepackage[a4paper, margin=1.5cm]{geometry}
 
 
 %%%%%%%%%
