@@ -1,4 +1,4 @@
-LATEX=pdflatex
+LATEX=xelatex
 PYTHON=python3.7
 
 .DEFAULT_GOAL := render
