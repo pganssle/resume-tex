@@ -9,6 +9,9 @@
 % Set up header
 \RequirePackage{fancyhdr}
 \RequirePackage{hyperref}
+\RequirePackage{titlesec}
+\RequirePackage{xcolor}
+
 \AtBeginDocument{%
 %%%%%%%%
 %% Default variable declarations
@@ -26,4 +29,14 @@
         \authorphone{} \textperiodcentered\ \authoremail{} \\
         \authorwebsite{}
     \end{tabular}}
+
+%%%%%
+% Section formatting
+\titleformat{\section}[block]
+    {\normalfont\large\color{white}}
+    {}
+    {0em}
+    {\colorbox{black}}
+    [\color{black}{\vspace{-1.5pt}\titlerule[1.5pt]}]
+
 }
