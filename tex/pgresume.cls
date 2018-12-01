@@ -34,7 +34,7 @@ headheight=2cm]{geometry}
 % Header
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\Large\@author}
+\fancyhead[L]{\fontsize{24pt}{24pt}\selectfont\textbf{\@author}\normalfont}
 \fancyhead[R]{
     \begin{tabular}{r}
         \authorphone{} \textperiodcentered\ \authoremail{} \\
