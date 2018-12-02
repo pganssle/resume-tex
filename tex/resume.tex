@@ -1,0 +1,35 @@
+\documentclass[hidelinks]{pgresume}
+
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{tabularx}
+
+\urlstyle{same}
+\newcommand*{\email}[1]{\href{mailto:#1}{\nolinkurl{#1}} }
+
+
+%--------------------%
+%   Author metadata
+\author{\VAR{metadata.author}}
+\newcommand{\authoremail}[0]{\email{\VAR{metadata.email}}}
+\newcommand{\authorwebsite}[0]{\url{\VAR{metadata.website}}}
+\newcommand{\authorphone}[0]{\VAR{metadata.phone}}
+
+
+\begin{document}
+\BLOCK{if cvdata.education}
+\section{Education}
+\BLOCK{for degree in cvdata.education}
+\begin{tabularx}{\textwidth}{@{}lr@{}}
+    \textit{\VAR{degree.institution}} & \VAR{degree.date} \\
+    \multicolumn{2}{l}{\VAR{degree.degree}}\BLOCK{if degree.thesis} \\
+    \multicolumn{2}{X}{\underline{Thesis:} \href{\VAR{degree.thesis.link}}%
+                                                {\VAR{degree.thesis.text}}}
+    \BLOCK{endif}
+\end{tabularx}
+\vspace{2pt}
+\newline
+\BLOCK{endfor}
+\BLOCK{endif}
+
+\end{document}
