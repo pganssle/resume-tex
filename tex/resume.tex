@@ -6,7 +6,7 @@
 
 \urlstyle{same}
 \newcommand*{\email}[1]{\href{mailto:#1}{\nolinkurl{#1}} }
-
+\newcommand\hyph{-\penalty0\hskip0pt\relax}
 
 %--------------------%
 %   Author metadata
@@ -46,7 +46,7 @@
 \BLOCK{endif}%
 \begin{itemize}
     %% for detail in job.details
-    \item \VAR{detail}
+    \item \VAR{detail.replace('-', '\hyph{}')}
     %% endfor
 \end{itemize}
 \vspace{2pt}
