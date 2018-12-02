@@ -55,4 +55,8 @@ headheight=2cm]{geometry}
 %%%%%
 % Itemize formatting
 \setlist[itemize]{leftmargin=*, nosep}
+
+%%%%%
+% General
+\setlength{\parindent}{0pt}
 }
