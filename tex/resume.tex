@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
 \usepackage{tabularx}
+\usepackage{multicol}
 
 \urlstyle{same}
 \newcommand*{\email}[1]{\href{mailto:#1}{\nolinkurl{#1}} }
@@ -17,6 +18,30 @@
 
 
 \begin{document}
+\BLOCK{if cvdata.skills}
+\section{Technical Skills}
+\vspace{-\baselineskip}
+\begin{multicols}{2}
+\textbf{Programming Languages:}\\
+\VAR{', '.join(cvdata.skills["Programming Languages"])}
+\vfill
+\textbf{Languages:}\\
+\VAR{', '.join(cvdata.skills["Languages"])}
+\columnbreak
+
+\textbf{Programs:}
+\vspace{-\baselineskip}
+\begin{multicols}{2}
+    \begin{itemize}
+        %% for program in cvdata.skills["Programs"]
+        \item \VAR{program}
+        %% endfor
+    \end{itemize}
+\end{multicols}
+\end{multicols}
+\vspace{4pt}
+\BLOCK{endif}
+
 \BLOCK{if cvdata.education}
 \section{Education}
 \BLOCK{for degree in cvdata.education}
