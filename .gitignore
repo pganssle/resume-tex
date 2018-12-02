@@ -1,4 +1,6 @@
 *.aux
 *.log
 *.dvi
+.venv
+data
 output/
