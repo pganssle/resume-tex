@@ -44,12 +44,13 @@ headheight=2cm]{geometry}
 
 %%%%%
 % Section formatting
+\titlespacing*{\section}{0pt}{-\baselineskip}{0.25\baselineskip}
 \titleformat{\section}[block]
     {\normalfont\large\color{white}}
     {}
     {0em}
     {\colorbox{black}}
-    [\color{black}{\vspace{-1.5pt}\titlerule[1.5pt]\vspace{-6pt}}]
+    [\color{black}{\vspace{-1.5pt}\titlerule[1.5pt]}]
 
 %%%%%
 % Itemize formatting
