@@ -20,13 +20,11 @@
 \BLOCK{if cvdata.education}
 \section{Education}
 \BLOCK{for degree in cvdata.education}
-\begin{tabularx}{\textwidth}{@{}lr@{}}
-    \textit{\VAR{degree.institution}} & \VAR{degree.date} \\
-    \multicolumn{2}{l}{\VAR{degree.degree}}\BLOCK{if degree.thesis} \\
-    \multicolumn{2}{X}{\underline{Thesis:} \href{\VAR{degree.thesis.link}}%
-                                                {\VAR{degree.thesis.text}}}
-    \BLOCK{endif}
-\end{tabularx}
+\textit{\VAR{degree.institution}} \hfill \VAR{degree.date} \\
+\VAR{degree.degree} \\
+%% if degree.thesis
+\underline{Thesis:} \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}
+%% endif
 \vspace{2pt}
 \newline
 \BLOCK{endfor}
@@ -49,7 +47,7 @@
     \item \VAR{detail.replace('-', '\hyph{}')}
     %% endfor
 \end{itemize}
-\vspace{2pt}
+\vspace{4pt}
 %% endfor
 %% endif
 
