@@ -48,6 +48,5 @@ headheight=2cm]{geometry}
     {}
     {0em}
     {\colorbox{black}}
-    [\color{black}{\vspace{-1.5pt}\titlerule[1.5pt]}]
-
+    [\color{black}{\vspace{-1.5pt}\titlerule[1.5pt]\vspace{-6pt}}]
 }
