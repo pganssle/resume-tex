@@ -22,6 +22,7 @@ headheight=2cm]{geometry}
 \RequirePackage{hyperref}
 \RequirePackage{titlesec}
 \RequirePackage{xcolor}
+\RequirePackage{enumitem}
 
 \AtBeginDocument{%
 %%%%%%%%
@@ -49,4 +50,8 @@ headheight=2cm]{geometry}
     {0em}
     {\colorbox{black}}
     [\color{black}{\vspace{-1.5pt}\titlerule[1.5pt]\vspace{-6pt}}]
+
+%%%%%
+% Itemize formatting
+\setlist[itemize]{leftmargin=*, nosep}
 }

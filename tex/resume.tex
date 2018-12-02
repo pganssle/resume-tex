@@ -32,4 +32,29 @@
 \BLOCK{endfor}
 \BLOCK{endif}
 
+%% if cvdata.work_experience
+\section{Work Experience}
+%% for job in cvdata.work_experience[0:3]
+\begin{tabularx}{\textwidth}{@{}l r@{}}
+    \textbf{\VAR{job.title}}%
+        \BLOCK{if job.department}, \VAR{job.department}\BLOCK{endif}%
+        , \VAR{job.company} & %
+        \VAR{job.date_start.strftime("%b %Y")} -- %
+        \VAR{job.date_end.strftime("%b %Y") if job.date_end else "Present"} \\
+    \BLOCK{if job.advisor}%
+    \multicolumn{2}{l}{\underline{Advisor:} \VAR{job.advisor}}
+    \BLOCK{endif}%
+\end{tabularx}
+\vspace{-0.9\baselineskip}
+\newline
+\vspace{-0.5\baselineskip}
+\begin{itemize}%
+        %% for detail in job.details
+        \item \VAR{detail}
+        %% endfor
+\end{itemize}%
+%% endfor
+%% endif
+
+
 \end{document}
