@@ -103,14 +103,19 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
 \end{multicols}
 %% endif
 
-%% if cvdata.publications or cvdata.talks
-%% if cvdata.publications and cvdata.talks
+%% set talk_instances = False
+%% set show_publications = True and cvdata.publications
+%% set show_talks = True and cvdata.talks
+
+%% if show_publications or show_talks
+%% if show_publications and show_talks
 \section{Selected Papers and Presentations}
-%% elif cvdata.publications
-\section{Selected Papers}
+%% elif show_publications
+\section{Selected Publications}
 %% else
-\section{Selected Presentations
+\section{Selected Presentations}
 %%endif
+%% if show_publications
 \textbf{Publications:} \\
 \newcommand{\doi}[1]{\href{https://doi.org/#1}{#1}}
 \vspace{-\baselineskip}
@@ -139,9 +144,39 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
     \BLOCK{if paper.pages}, \VAR{paper.pages}\BLOCK{endif}%
     \BLOCK{if paper.doi}, \doi{\VAR{paper.doi}}\BLOCK{endif}%
     \BLOCK{if paper.pdf}\textperiodcentered{} \pdflink{\VAR{paper.pdf}}\BLOCK{endif}%
-\end{itemize}
-
 %% endfor
+\end{itemize}
+\vspace{5pt}
+%% endif
+
+%% if show_talks
+\textbf{Talks}:\\
+\vspace{-\baselineskip}
+\begin{itemize}
+%% for talk in cvdata.talks[0:3]
+    \item %
+        "\VAR{talk.title}"%
+        %% if talk.instances and talk_instances
+        \begin{itemize}
+            %% for instance in talk.instances
+                %% set name, location = get_event_details(instance)
+                \item \VAR{name}, \VAR{instance.date.strftime("%B %d, %Y")}
+            %% endfor
+        \end{itemize}
+        %% else
+            %% if talk.instances
+                %% set name, location = get_event_details(talk.instances[0])
+                %% set date = talk.instances[0].date
+            %% else
+                %% set name, location = get_event_details(talk)
+                %% set date = talk.date
+            %% endif
+            , \VAR{name}, \VAR{date.strftime("%B %d, %Y")}
+        %% endif
+%% endfor
+\end{itemize}
+%% endif
+
 %%endif
 
 \end{document}
