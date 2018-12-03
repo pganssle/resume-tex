@@ -18,7 +18,11 @@ headheight=2cm]{geometry}
 
 
 % Set up commands
-\newcommand{\pdflink}[1]{\href{#1}{PDF}}
+\newcommand{\pdflink}[1]{\href{#1}{%
+    \raisebox{-0.15\baselineskip}{%
+        \includegraphics[height=0.9\baselineskip]{images/pdf-icon.pdf}
+    }%
+}}
 
 %%%%%%%%%
 % Set up header
@@ -27,6 +31,7 @@ headheight=2cm]{geometry}
 \RequirePackage{titlesec}
 \RequirePackage{xcolor}
 \RequirePackage{enumitem}
+\RequirePackage{graphicx}
 
 \AtBeginDocument{%
 %%%%%%%%
