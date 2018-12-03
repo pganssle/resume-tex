@@ -46,8 +46,8 @@
 \BLOCK{if cvdata.education}
 \section{Education}
 \BLOCK{for degree in cvdata.education}
+\textbf{\VAR{degree.degree}} \\
 \textit{\VAR{degree.institution}} \hfill \VAR{degree.date} \\
-\VAR{degree.degree} \\
 %% if degree.thesis
 Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}
 %% endif
