@@ -100,4 +100,45 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}
 \end{multicols}
 %% endif
 
+%% if cvdata.publications or cvdata.talks
+%% if cvdata.publications and cvdata.talks
+\section{Selected Papers and Presentations}
+%% elif cvdata.publications
+\section{Selected Papers}
+%% else
+\section{Selected Presentations
+%%endif
+\textbf{Publications:} \\
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{#1}}
+\vspace{-\baselineskip}
+\begin{itemize}
+%% for paper in cvdata.publications[0:1]
+    \item %
+    %% for author in paper.authors
+        %% if author in metadata.author_names
+            \underline{\VAR{author}}%
+        %% else
+            \VAR{author}%
+        %% endif
+        , %
+    %% endfor
+    "\VAR{paper.title}", \textit{\VAR{paper.publication}}%
+    %% if paper.cover
+        , %
+        %% if paper.cover_url
+            \href{\VAR{paper.cover_url}}{\VAR{paper.cover}}%
+        %% else
+            \textbf{\VAR{paper.cover}}
+        %% endif
+    %% endif
+    \BLOCK{if paper.issue}, \VAR{paper.issue}\BLOCK{endif}%
+    \BLOCK{if paper.year}, \textbf{\VAR{paper.year}}\BLOCK{endif}%
+    \BLOCK{if paper.pages}, \VAR{paper.pages}\BLOCK{endif}%
+    \BLOCK{if paper.doi}, \doi{\VAR{paper.doi}}\BLOCK{endif}%
+
+\end{itemize}
+
+%% endfor
+%%endif
+
 \end{document}
