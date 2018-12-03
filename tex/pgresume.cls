@@ -59,7 +59,7 @@ headsep=0.25cm]{geometry}
 % Header
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\fontsize{24pt}{24pt}\selectfont\textbf{\@author}\normalfont}
+\fancyhead[L]{\fontsize{26pt}{26pt}\selectfont\textbf{\@author}\normalfont}
 \fancyhead[R]{
     {\hypersetup{urlcolor=black,urlbordercolor=black}
     \begin{tabular}{r}
@@ -71,12 +71,14 @@ headsep=0.25cm]{geometry}
 
 %%%%%
 % Section formatting
+\newcommand{\sectiontitlebox}[1]{\colorbox{black}{\parbox{0.4\textwidth}{#1}}}
+
 \titlespacing*{\section}{0pt}{-0.5\baselineskip}{0.25\baselineskip}
 \titleformat{\section}[block]
     {\normalfont\large\color{white}}
     {}
     {0em}
-    {\colorbox{black}}
+    {\sectiontitlebox}
     [\color{black}{\vspace{-1.5pt}\titlerule[1.5pt]}]
 
 %%%%%
