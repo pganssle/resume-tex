@@ -15,10 +15,13 @@ headsep=0.25cm]{geometry}
 \usepackage{fontspec}
 \setmainfont[
     Ligatures=TeX,
+    FontFace = {sb}{n}{Frutiger Next Pro Medium},
 ]{Frutiger Next Pro}
 
-
 % Set up commands
+\DeclareRobustCommand{\sbseries}{\fontseries{sb}\selectfont}
+\DeclareTextFontCommand{\textsb}{\sbseries}
+
 \newcommand{\pdflink}[1]{\href{#1}{%
     \raisebox{-0.15\baselineskip}{%
         \includegraphics[height=0.9\baselineskip]{images/pdf-icon.pdf}
