@@ -31,16 +31,30 @@ headheight=2cm]{geometry}
 \providecommand{\authorphone}{}
 \providecommand{\authorwebsite}{}
 
+\definecolor{linkcolor}{RGB}{26,65,130}
+
+\hypersetup{%
+    urlcolor=linkcolor, %
+    urlbordercolor=linkcolor, %
+    linkcolor=linkcolor, %
+    linkbordercolor=linkcolor, %
+    pdfborderstyle={/S/U/W 0.5},%
+    pdfauthor=\@author %
+}
+
 %%%%%
 % Header
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\fontsize{24pt}{24pt}\selectfont\textbf{\@author}\normalfont}
 \fancyhead[R]{
+    {\hypersetup{urlcolor=black,urlbordercolor=black}
     \begin{tabular}{r}
         \authorphone{} \textperiodcentered\ \authoremail{} \\
         \authorwebsite{}
-    \end{tabular}}
+    \end{tabular}
+    }
+}
 
 %%%%%
 % Section formatting

@@ -1,4 +1,4 @@
-\documentclass[hidelinks]{pgresume}
+\documentclass[ocgcolorlinks]{pgresume}
 
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
@@ -7,6 +7,8 @@
 
 \urlstyle{same}
 \newcommand*{\email}[1]{\href{mailto:#1}{\nolinkurl{#1}} }
+
+
 \newcommand\hyph{-\penalty0\hskip0pt\relax}
 
 %--------------------%
@@ -47,7 +49,7 @@
 \textit{\VAR{degree.institution}} \hfill \VAR{degree.date} \\
 \VAR{degree.degree} \\
 %% if degree.thesis
-\underline{Thesis:} \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}
+Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}
 %% endif
 %% if not loop.last
 \vspace{3pt}
@@ -58,7 +60,7 @@
 
 %% if cvdata.work_experience
 \section{Work Experience}
-%% for job in cvdata.work_experience[0:3]
+%% for job in cvdata.work_experience[0:4]
 \textbf{\VAR{job.title}}%
     \BLOCK{if job.department}, \VAR{job.department}\BLOCK{endif}%
     , \VAR{job.company} \hfill %
