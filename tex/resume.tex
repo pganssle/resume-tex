@@ -46,8 +46,8 @@
 \BLOCK{if cvdata.education}
 \section{Education}
 \BLOCK{for degree in cvdata.education}
-\textbf{\VAR{degree.degree}} \\
-\textit{\VAR{degree.institution}} \hfill \VAR{degree.date} \\
+\textbf{\VAR{degree.degree}} \hfill \textsb{\VAR{degree.date}}\\
+\textit{\VAR{degree.institution}}\\
 %% if degree.thesis
 Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
     %% if degree.thesis.pdf
@@ -67,8 +67,8 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
 \textbf{\VAR{job.title}}%
     \BLOCK{if job.department}, \VAR{job.department}\BLOCK{endif}%
     , \VAR{job.company} \hfill %
-    \VAR{job.date_start.strftime("%b %Y")} -- %
-    \VAR{job.date_end.strftime("%b %Y") if job.date_end else "Present"}
+    \textsb{\VAR{job.date_start.strftime("%b %Y")} -- %
+    \VAR{job.date_end.strftime("%b %Y") if job.date_end else "Present"}}
 
 \BLOCK{if job.advisor}
 \underline{Advisor:} \VAR{job.advisor}
@@ -78,6 +78,9 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
     \item \VAR{detail.replace('-', '\hyph{}')}
     %% endfor
 \end{itemize}
+%% if not loop.last
+\vspace{2pt}
+%% endif
 %% endfor
 %% endif
 
