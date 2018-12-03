@@ -163,7 +163,7 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
         \begin{itemize}
             %% for instance in talk.instances
                 %% set name, location = get_event_details(instance)
-                \item \VAR{name}, \VAR{instance.date.strftime("%B %d, %Y")}
+                \item \textsb{\VAR{name}}, \VAR{instance.date.strftime("%B %d, %Y")}
             %% endfor
         \end{itemize}
         %% else
@@ -174,7 +174,7 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
                 %% set name, location = get_event_details(talk)
                 %% set date = talk.date
             %% endif
-            , \VAR{name}, \VAR{date.strftime("%B %d, %Y")}
+            , \textsb{\VAR{name}}, \VAR{date.strftime("%B %d, %Y")}
         %% endif
 %% endfor
 \end{itemize}
