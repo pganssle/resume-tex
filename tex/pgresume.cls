@@ -8,7 +8,8 @@
 \usepackage[a4paper,
 margin=1.5cm,
 top=2.5cm,
-headheight=2cm]{geometry}
+headheight=2cm,
+headsep=0.25cm]{geometry}
 
 % Set up fonts
 \usepackage{fontspec}
