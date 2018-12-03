@@ -78,5 +78,26 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}
 %% endfor
 %% endif
 
+%% if cvdata.open_source
+\vspace{\baselineskip}
+\section{Open Source}
+\vspace{-\baselineskip}
+\begin{multicols}{2}
+%% for project in cvdata.open_source
+\textbf{%
+%% if project.url
+\href{\VAR{project.url}}{\VAR{project.project}}%
+%% else
+\VAR{project.project}%
+%% endif
+}, \textit{\VAR{project.role}}\newline
+\VAR{project.description}
+
+%% if not loop.last
+\vspace{3pt}
+%% endif
+%% endfor
+\end{multicols}
+%% endif
 
 \end{document}
