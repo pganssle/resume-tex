@@ -18,6 +18,8 @@ headsep=0.25cm]{geometry}
     FontFace = {sb}{n}{Frutiger Next Pro Medium},
 ]{Frutiger Next Pro}
 
+\setmonofont{Source Code Pro}
+
 % Set up commands
 \DeclareRobustCommand{\sbseries}{\fontseries{sb}\selectfont}
 \DeclareTextFontCommand{\textsb}{\sbseries}
