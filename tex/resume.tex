@@ -39,7 +39,6 @@
     \end{itemize}
 \end{multicols}
 \end{multicols}
-\vspace{4pt}
 \BLOCK{endif}
 
 \BLOCK{if cvdata.education}
@@ -50,8 +49,10 @@
 %% if degree.thesis
 \underline{Thesis:} \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}
 %% endif
-\vspace{2pt}
+%% if not loop.last
+\vspace{3pt}
 \newline
+%% endif
 \BLOCK{endfor}
 \BLOCK{endif}
 
@@ -72,7 +73,6 @@
     \item \VAR{detail.replace('-', '\hyph{}')}
     %% endfor
 \end{itemize}
-\vspace{4pt}
 %% endfor
 %% endif
 

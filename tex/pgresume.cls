@@ -44,7 +44,7 @@ headheight=2cm]{geometry}
 
 %%%%%
 % Section formatting
-\titlespacing*{\section}{0pt}{-\baselineskip}{0.25\baselineskip}
+\titlespacing*{\section}{0pt}{-0.5\baselineskip}{0.25\baselineskip}
 \titleformat{\section}[block]
     {\normalfont\large\color{white}}
     {}
