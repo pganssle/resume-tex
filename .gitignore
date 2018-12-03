@@ -1,6 +1,9 @@
 *.aux
 *.log
 *.dvi
+
+*.py[co]
 .venv
-data
+
+data/
 output/
