@@ -2,7 +2,9 @@ import jinja2
 import yaml
 
 from pathlib import Path
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+
+from typing import Dict, Any
 
 @dataclass
 class ResumeBuilder:
@@ -14,6 +16,7 @@ class ResumeBuilder:
     data_dir : Path = Path('data')
     cv_contents_file : Path = Path('cv_contents.yml')
     personal_data_file : Path = Path('personal_data.yml')
+    custom_funcs : Dict[str, Any] = field(default_factory=list)
 
     def __post_init__(self):
         self._cache = {}
@@ -53,21 +56,30 @@ class ResumeBuilder:
 
     @property
     def jinja_env(self):
-        return self._cache.setdefault('jinja_env',
-            jinja2.Environment(
-                block_start_string = '\BLOCK{',
-                block_end_string = '}',
-                variable_start_string = '\VAR{',
-                variable_end_string = '}',
-                comment_start_string = '\#{',
-                comment_end_string = '}',
-                line_statement_prefix = '%%',
-                line_comment_prefix = '%#',
-                trim_blocks = True,
-                autoescape = False,
-                loader=jinja2.FileSystemLoader([self.tex_path]),
-            )
+        if 'jinja_env' in self._cache:
+            return self._cache['jinja_env']
+
+        env = jinja2.Environment(
+            block_start_string = '\BLOCK{',
+            block_end_string = '}',
+            variable_start_string = '\VAR{',
+            variable_end_string = '}',
+            comment_start_string = '\#{',
+            comment_end_string = '}',
+            line_statement_prefix = '%%',
+            line_comment_prefix = '%#',
+            trim_blocks = True,
+            autoescape = False,
+            loader=jinja2.FileSystemLoader([self.tex_path]),
         )
+
+        for func_name, func in self.custom_funcs.items():
+            if func_name in env.globals:
+                raise ValueError(f"Name conflict with {func_name}")
+
+            env.globals[func_name] = func
+
+        return self._cache.setdefault('jinja_env', env)
 
     @property
     def template(self):
