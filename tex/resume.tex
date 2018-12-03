@@ -49,7 +49,10 @@
 \textbf{\VAR{degree.degree}} \\
 \textit{\VAR{degree.institution}} \hfill \VAR{degree.date} \\
 %% if degree.thesis
-Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}
+Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
+    %% if degree.thesis.pdf
+        \textperiodcentered{} \pdflink{\VAR{degree.thesis.pdf.replace("%", "\\%")}}%
+    %% endif
 %% endif
 %% if not loop.last
 \vspace{3pt}
@@ -135,7 +138,7 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}
     \BLOCK{if paper.year}, \textbf{\VAR{paper.year}}\BLOCK{endif}%
     \BLOCK{if paper.pages}, \VAR{paper.pages}\BLOCK{endif}%
     \BLOCK{if paper.doi}, \doi{\VAR{paper.doi}}\BLOCK{endif}%
-
+    \BLOCK{if paper.pdf}\textperiodcentered{} \pdflink{\VAR{paper.pdf}}\BLOCK{endif}%
 \end{itemize}
 
 %% endfor

@@ -16,6 +16,10 @@ headheight=2cm]{geometry}
     Ligatures=TeX,
 ]{Frutiger Next Pro}
 
+
+% Set up commands
+\newcommand{\pdflink}[1]{\href{#1}{PDF}}
+
 %%%%%%%%%
 % Set up header
 \RequirePackage{fancyhdr}
