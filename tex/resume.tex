@@ -20,6 +20,10 @@
 
 
 \begin{document}
+
+%% set show_languages=False
+%% set show_libraries=True
+
 \BLOCK{if cvdata.skills}
 \section{Technical Skills}
 \vspace{-\baselineskip}
@@ -27,8 +31,19 @@
 \textbf{Programming Languages:}\\
 \VAR{', '.join(cvdata.skills["Programming Languages"])}
 \vfill
+%% if show_languages
 \textbf{Languages:}\\
 \VAR{', '.join(cvdata.skills["Languages"])}
+%% endif
+%% if show_libraries
+\textbf{Libraries:}\\
+%% for library in cvdata.skills['Libraries'][0:6]
+\texttt{\VAR{library}}%
+%% if not loop.last
+, %
+%%endif
+%% endfor
+%% endif
 \columnbreak
 
 \textbf{Programs:}
