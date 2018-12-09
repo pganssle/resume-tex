@@ -1,4 +1,5 @@
 import re
+from html import parser
 
 def get_event_details(talk):
     name = None
@@ -66,14 +67,56 @@ def latex_escape(s):
     return SPECIAL_CHARS.sub(r'\\\1', s)
 
 
+class HTML2LatexParser(parser.HTMLParser):
+    TAGS = {
+        "sup": (r"\textsuperscript{", "}"),
+        "sub": (r"\textsubscript{", "}"),
+        "em": (r"\textit{", "}"),
+        "b": (r"\textbf{", "}"),
+    }
+
+    def convert(self, s):
+        self.__latex = ""
+        self._tag_stack = []
+        self.feed(s)
+        latex = self.__latex
+        self.__latex = ""
+        return latex
+
+    def handle_starttag(self, tag, attrs):
+        if tag not in self.TAGS:
+            raise ValueError(f"Cannot convert tag {tag}")
+
+        if attrs:
+            raise ValueError(f"Cannot handle attrs for tag {tag}: {attrs}")
+
+        self.__latex += self.TAGS[tag][0]
+        self._tag_stack.append(tag)
+
+    def handle_endtag(self, tag):
+        assert tag == self._tag_stack.pop()
+
+        self.__latex += self.TAGS[tag][1]
+
+    def handle_data(self, data):
+        self.__latex += data
+
+
+def html2latex(s):
+    return HTML2LatexParser().convert(s)
+
 def get_custom_funcs():
     funcs = [
         'get_event_details',
         'slice_values',
         'latex_escape',
-        'all',      # builtin
-        'any',      # builtin
+        'html2latex',
     ]
 
     GLOBAL_VALS = globals()
     cfm = {k: GLOBAL_VALS.get(k) for k in funcs}
+
+    # Add some builtins
+    cfm.update({'any': any, 'all': all})
+
+    return cfm
