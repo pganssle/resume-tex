@@ -85,9 +85,13 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
 \BLOCK{endif}
 \BLOCK{endwith}
 
-%% if cvdata.work_experience
+\BLOCK{with}
+%% set wec = config.work_experience or {}
+%% set show = cvdata.work_experience and wec.get('show_work_experience', True)
+\BLOCK{if show}
 \section{Work Experience}
-%% for job in cvdata.work_experience[0:4]
+%% set show_jobs = wec.get('show_jobs', True)
+%% for job in slice_values(cvdata.work_experience, show_jobs)
 \textbf{\VAR{job.title}}%
     \BLOCK{if job.department}, \VAR{job.department}\BLOCK{endif}%
     , \VAR{job.company} \hfill %
@@ -106,7 +110,8 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
 \vspace{2pt}
 %% endif
 %% endfor
-%% endif
+\BLOCK{endif}
+\BLOCK{endwith}
 
 %% if cvdata.open_source
 \vspace{\baselineskip}
