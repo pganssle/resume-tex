@@ -21,23 +21,25 @@
 
 \begin{document}
 
-%% set show_languages=False
-%% set show_libraries=True
-
-\BLOCK{if cvdata.skills}
+\BLOCK{with}
+%% set skon = config.skills
+%% set showskills = any(skon.values())
+\BLOCK{if cvdata.skills and showskills}
 \section{Technical Skills}
 \vspace{-\baselineskip}
 \begin{multicols}{2}
+%% if skon.show_prog_langs
 \textbf{Programming Languages:}\\
-\VAR{', '.join(cvdata.skills["Programming Languages"])}
+\VAR{', '.join(slice_values(cvdata.skills["Programming Languages"], skon.show_prog_langs))}
 \vfill
-%% if show_languages
-\textbf{Languages:}\\
-\VAR{', '.join(cvdata.skills["Languages"])}
 %% endif
-%% if show_libraries
+%% if skon.show_natural_langs
+\textbf{Languages:}\\
+\VAR{', '.join(slice_values(cvdata.skills["Languages"], skon.show_natural_langs))}
+%% endif
+%% if skon.show_libraries
 \textbf{Libraries:}\\
-%% for library in cvdata.skills['Libraries'][0:6]
+%% for library in slice_values(cvdata.skills['Libraries'], skon.show_libraries)
 \texttt{\VAR{library}}%
 %% if not loop.last
 , %
@@ -46,17 +48,20 @@
 %% endif
 \columnbreak
 
+%% if skon.show_programs
 \textbf{Programs:}
 \vspace{-\baselineskip}
 \begin{multicols}{2}
     \begin{itemize}
-        %% for program in cvdata.skills["Programs"]
+        %% for program in slice_values(cvdata.skills["Programs"], skon.show_programs)
         \item \VAR{program}
         %% endfor
     \end{itemize}
 \end{multicols}
+%% endif
 \end{multicols}
 \BLOCK{endif}
+\BLOCK{endwith}
 
 \BLOCK{if cvdata.education}
 \section{Education}
