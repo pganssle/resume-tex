@@ -1,6 +1,7 @@
 from . import resume_builder
 from pathlib import Path
 import os
+import re
 
 def get_event_details(talk):
     name = None
@@ -62,10 +63,17 @@ def slice_values(values, subset):
     raise TypeError(f"Cannot process subset of class {type(subset).__name__}")
 
 
+SPECIAL_CHARS = re.compile(r'([\\&%$#_{}~^])')
+def latex_escape(s):
+    # Make all special characters literals
+    return SPECIAL_CHARS.sub(r'\\\1', s)
+
+
 def main():
     builder = resume_builder.ResumeBuilder(
         custom_funcs={'get_event_details': get_event_details,
                       'slice_values': slice_values,
+                      'latex_escape': latex_escape,
                       'any': any,
                       'all': all}
     )
