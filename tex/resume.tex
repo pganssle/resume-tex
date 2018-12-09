@@ -8,7 +8,6 @@
 \urlstyle{same}
 \newcommand*{\email}[1]{\href{mailto:#1}{\nolinkurl{#1}} }
 
-
 \newcommand\hyph{-\penalty0\hskip0pt\relax}
 
 %--------------------%
@@ -113,12 +112,16 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
 \BLOCK{endif}
 \BLOCK{endwith}
 
-%% if cvdata.open_source
+\BLOCK{with}
+%% set osec = config.open_source or {}
+%% set show = cvdata.open_source and osec.get('show_open_source', True)
+\BLOCK{if show}
 \vspace{\baselineskip}
 \section{Open Source}
 \vspace{-\baselineskip}
 \begin{multicols}{2}
-%% for project in cvdata.open_source
+%% set show_projects = osec.get('show_projects', True)
+%% for project in slice_values(cvdata.open_source, show_projects)
 \textbf{%
 %% if project.url
 \href{\VAR{project.url}}{\VAR{project.project}}%
@@ -133,7 +136,8 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
 %% endif
 %% endfor
 \end{multicols}
-%% endif
+\BLOCK{endif}
+\BLOCK{endwith}
 
 %% set talk_instances = False
 %% set show_publications = True and cvdata.publications
