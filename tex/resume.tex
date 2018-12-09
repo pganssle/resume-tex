@@ -63,7 +63,10 @@
 \BLOCK{endif}
 \BLOCK{endwith}
 
-\BLOCK{if cvdata.education}
+\BLOCK{with}
+%% set ec = config.education or {}
+%% set show = cvdata.education and ec.get('show_education', True)
+\BLOCK{if show}
 \section{Education}
 \BLOCK{for degree in cvdata.education}
 \textbf{\VAR{degree.degree}} \hfill \textsb{\VAR{degree.date}}\\
@@ -80,6 +83,7 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
 %% endif
 \BLOCK{endfor}
 \BLOCK{endif}
+\BLOCK{endwith}
 
 %% if cvdata.work_experience
 \section{Work Experience}
