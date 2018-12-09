@@ -102,7 +102,7 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
 \BLOCK{endif}%
 \begin{itemize}
     %% for detail in job.details
-    \item \VAR{detail.replace('-', '\hyph{}')}
+        \item \VAR{html2latex(detail.replace('-', '\hyph{}'))}
     %% endfor
 \end{itemize}
 %% if not loop.last
@@ -182,7 +182,7 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
         %% endif
         , %
     %% endfor
-    ``\VAR{paper.title}'', \textit{\VAR{paper.publication}}%
+    ``\VAR{html2latex(paper.title)}'', \textit{\VAR{paper.publication}}%
     %% if paper.cover
         , %
         %% if paper.cover_url
@@ -207,12 +207,12 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
 \begin{itemize}
 %% for talk in slice_values(cvdata.talks, show_talks)
     \item %
-        ``\VAR{talk.title}''%
+        ``\VAR{html2latex(talk.title)}''%
         %% if talk.instances and pc.talk_instances
         \begin{itemize}
             %% for instance in talk.instances
                 %% set name, location = get_event_details(instance)
-                \item \textsb{\VAR{name}}, \VAR{instance.date.strftime("%B %d, %Y")}
+            \item \textsb{\VAR{html2latex(name)}}, \VAR{instance.date.strftime("%B %d, %Y")}
             %% endfor
         \end{itemize}
         %% else
@@ -223,7 +223,7 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
                 %% set name, location = get_event_details(talk)
                 %% set date = talk.date
             %% endif
-            , \textsb{\VAR{name}}, \VAR{date.strftime("%B %d, %Y")}
+            , \textsb{\VAR{html2latex(name)}}, \VAR{date.strftime("%B %d, %Y")}
         %% endif
 %% endfor
 \end{itemize}
