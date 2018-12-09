@@ -143,20 +143,36 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
 %% set show_publications = True and cvdata.publications
 %% set show_talks = True and cvdata.talks
 
-%% if show_publications or show_talks
-%% if show_publications and show_talks
-\section{Selected Papers and Presentations}
+\BLOCK{with}
+
+%% set pc = config.public or {}
+
+%% set show_talks = pc.get('show_talks', True)
+%% set show_publications = pc.get('show_publications', True)
+%% set show_posters = pc.get('show_posters', True)
+%% set show = any([show_talks, show_publications, show_posters])
+
+\BLOCK{if show}
+%% set title = ""
+%% if pc.selected
+    %% set title = "Selected "
+%% endif
+
+%% if show_publications and (show_talks or show_posters)
+    %% set title = title ~ "Papers and Presentations"
 %% elif show_publications
-\section{Selected Publications}
+    %% set title = title ~ "Publications"
 %% else
-\section{Selected Presentations}
+    %% set title = title ~ "Presentations"
 %%endif
+
+\section{\VAR{title}}
 %% if show_publications
 \textbf{Publications:} \\
 \newcommand{\doi}[1]{\href{https://doi.org/#1}{#1}}
 \vspace{-\baselineskip}
 \begin{itemize}
-%% for paper in cvdata.publications[0:1]
+%% for paper in slice_values(cvdata.publications, show_publications)
     \item %
     %% for author in paper.authors
         %% if author in metadata.author_names
@@ -189,10 +205,10 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
 \textbf{Talks}:\\
 \vspace{-\baselineskip}
 \begin{itemize}
-%% for talk in cvdata.talks[0:4]
+%% for talk in slice_values(cvdata.talks, show_talks)
     \item %
         ``\VAR{talk.title}''%
-        %% if talk.instances and talk_instances
+        %% if talk.instances and pc.talk_instances
         \begin{itemize}
             %% for instance in talk.instances
                 %% set name, location = get_event_details(instance)
@@ -213,6 +229,7 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
 \end{itemize}
 %% endif
 
-%%endif
+\BLOCK{endif}
+\BLOCK{endwith}
 
 \end{document}
