@@ -281,4 +281,28 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
 \BLOCK{endif}
 \BLOCK{endwith}
 
+\BLOCK{with}
+%% set cc = config.courses or {}
+%% set show_institutions = cc.get('show_institutions', True)
+%% set show = cc.get('show_courses', True) and show_institutions and cvdata.courses
+
+\BLOCK{if show}
+\vspace{\baselineskip}
+\section{Advanced Elective Coursework}
+
+%% for entry in slice_values(cvdata.courses, show_institutions)
+\textbf{\VAR{entry.institution}}
+\begin{itemize}
+    %% for course in entry.courses
+        %% set number = course.number_s or course.number
+        \item \VAR{number}: \VAR{course.name} (\VAR{course.instructor}, %
+            \VAR{course.semester}\BLOCK{if course.audited}, \textit{Audit}\BLOCK{endif})
+    %% endfor
+\end{itemize}
+%% endfor
+
+
+\BLOCK{endif}
+\BLOCK{endwith}
+
 \end{document}
