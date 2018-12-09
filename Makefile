@@ -11,7 +11,7 @@ PYTHON=python3.7
 	)
 
 
-output/resume.tex: .venv tex/pgresume.cls tex/resume.tex data/cv_contents.yml data/personal_data.yml
+output/resume.tex: .venv tex/pgresume.cls tex/resume.tex data/cv_contents.yml data/personal_data.yml  data/config.yml
 	(\
 		source .venv/bin/activate; \
 		python -m resume_builder; \
