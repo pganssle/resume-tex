@@ -57,6 +57,7 @@
         %% endfor
     \end{itemize}
 \end{multicols}
+\vfill
 %% endif
 \end{multicols}
 \BLOCK{endif}
@@ -100,11 +101,13 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
 \BLOCK{if job.advisor}
 \underline{Advisor:} \VAR{job.advisor}
 \BLOCK{endif}%
+%% if wec.show_details
 \begin{itemize}
-    %% for detail in job.details
+    %% for detail in slice_values(job.details, wec.get('show_details', True))
         \item \VAR{html2latex(detail.replace('-', '\hyph{}'))}
     %% endfor
 \end{itemize}
+%% endif
 %% if not loop.last
 \vspace{2pt}
 %% endif
