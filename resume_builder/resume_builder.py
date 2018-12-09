@@ -16,6 +16,7 @@ class ResumeBuilder:
     data_dir : Path = Path('data')
     cv_contents_file : Path = Path('cv_contents.yml')
     personal_data_file : Path = Path('personal_data.yml')
+    config_data_file : Path = Path('config.yml')
     custom_funcs : Dict[str, Any] = field(default_factory=list)
 
     def __post_init__(self):
@@ -49,6 +50,10 @@ class ResumeBuilder:
     @property
     def personal_data_path(self):
         return self.data_path / self.personal_data_file
+
+    @property
+    def config_data_path(self):
+        return self.data_path / self.config_data_file
 
     @property
     def output_path(self):
@@ -91,6 +96,7 @@ class ResumeBuilder:
         inputs = {
             'metadata': self._load_yaml(self.personal_data_path),
             'cvdata': self._load_yaml(self.cv_contents_path),
+            'config': self._load_yaml(self.config_data_path),
         }
 
         return inputs
