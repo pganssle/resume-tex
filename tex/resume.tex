@@ -142,12 +142,56 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
 \BLOCK{endif}
 \BLOCK{endwith}
 
-%% set talk_instances = False
-%% set show_publications = True and cvdata.publications
-%% set show_talks = True and cvdata.talks
+\BLOCK{with}
+%% set tec = config.teaching_experience or {}
+%% set show = cvdata.teaching_experience or tec.get('show_teaching', True)
+%% set show_details = tec.get('show_details', True)
+\BLOCK{if show}
+\section{Teaching Experience}
+%% for entry in cvdata.teaching_experience
+\textbf{\VAR{entry.title}}, \textit{\VAR{entry.institution}}
+    %% if entry.course
+        %% set course = entry.course
+        \newline
+        \textit{\VAR{course.number}: \VAR{course.name}}%
+    %% endif
+    %% for instance in entry.instances
+        %% if not (instance.course or instance.instructor)
+            \VAR{instance.semester}\BLOCK{if not loop.last}, \BLOCK{endif}
+        %% endif
+        %% if instance.course
+            %% set course = instance.course
+            \newline
+            \textit{\VAR{course.number}: \VAR{course.name}}, \VAR{instance.semester}%
+        %% endif
+        %% if instance.instructor
+            \newline
+            \underline{Instructor}: \VAR{instance.instructor}, \VAR{instance.semester}%
+        %% endif
+    %% endfor
+    %% if entry.instructor
+        \newline
+        \underline{Instructor}: \VAR{entry.instructor}, \VAR{entry.semester}
+    %% endif
+    %% if show_details and entry.details
+    \begin{itemize}
+        %% for detail in slice_values(entry.details, show_details)
+        \item \VAR{html2latex(detail.replace('-', '\hyph{}'))}
+        %% endfor
+    \end{itemize}
+    %% endif
+
+    %% if not loop.last
+    \vspace{4pt}
+    %% endif
+
+%% endfor
+\vspace{\baselineskip}
+\BLOCK{endif}
+\BLOCK{endwith}
+
 
 \BLOCK{with}
-
 %% set pc = config.public or {}
 
 %% set show_talks = pc.get('show_talks', True)
