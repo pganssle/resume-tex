@@ -148,7 +148,7 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
         %% endif
         , %
     %% endfor
-    "\VAR{paper.title}", \textit{\VAR{paper.publication}}%
+    ``\VAR{paper.title}'', \textit{\VAR{paper.publication}}%
     %% if paper.cover
         , %
         %% if paper.cover_url
@@ -173,7 +173,7 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
 \begin{itemize}
 %% for talk in cvdata.talks[0:4]
     \item %
-        "\VAR{talk.title}"%
+        ``\VAR{talk.title}''%
         %% if talk.instances and talk_instances
         \begin{itemize}
             %% for instance in talk.instances
