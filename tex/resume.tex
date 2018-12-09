@@ -74,7 +74,7 @@
 %% if degree.thesis
 Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
     %% if degree.thesis.pdf
-        \textperiodcentered{} \pdflink{\VAR{latex_escape(degree.thesis.pdf)}}%
+        \ \textperiodcentered{} \pdflink{\VAR{latex_escape(degree.thesis.pdf)}}%
     %% endif
 %% endif
 %% if not loop.last
@@ -241,8 +241,10 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
     \BLOCK{if paper.issue}, \VAR{paper.issue}\BLOCK{endif}%
     \BLOCK{if paper.year}, \textbf{\VAR{paper.year}}\BLOCK{endif}%
     \BLOCK{if paper.pages}, \VAR{paper.pages}\BLOCK{endif}%
+    \hbox{
     \BLOCK{if paper.doi}, \doi{\VAR{paper.doi}}\BLOCK{endif}%
-    \BLOCK{if paper.pdf}\textperiodcentered{} \pdflink{\VAR{latex_escape(paper.pdf)}}\BLOCK{endif}%
+    \BLOCK{if paper.pdf}\ \textperiodcentered{} \pdflink{\VAR{latex_escape(paper.pdf)}}\BLOCK{endif}%
+}
 %% endfor
 \end{itemize}
 \vspace{5pt}
