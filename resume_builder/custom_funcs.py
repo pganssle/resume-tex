@@ -1,4 +1,5 @@
 import re
+import itertools as it
 from html import parser
 
 def get_event_details(talk):
@@ -56,7 +57,7 @@ def slice_values(values, subset):
 
     if isinstance(subset, (list, tuple)):
         assert len(subset) == 2
-        return values[subset[0]:subset[1]]
+        return it.islice(values, subset[0], subset[1])
 
     raise TypeError(f"Cannot process subset of class {type(subset).__name__}")
 
