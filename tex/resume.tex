@@ -101,9 +101,10 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
 \BLOCK{if job.advisor}
 \underline{Advisor:} \VAR{job.advisor}
 \BLOCK{endif}%
-%% if wec.show_details
+%% set show_details = wec.get('show_details', True)
+%% if show_details and job.details
 \begin{itemize}
-    %% for detail in slice_values(job.details, wec.get('show_details', True))
+    %% for detail in slice_values(job.details, show_details)
         \item \VAR{html2latex(detail.replace('-', '\hyph{}'))}
     %% endfor
 \end{itemize}
