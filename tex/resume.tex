@@ -123,11 +123,25 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
 \section{Open Source}
 \vspace{-\baselineskip}
 \begin{multicols}{2}
-%% set show_projects = osec.get('show_projects', True)
-%% for project in slice_values(cvdata.open_source, show_projects)
+%% set show_main_projects = osec.get('show_main_projects', True)
+%% set show_secondary_projects = osec.get('show_secondary_projects', True)
+%% set main_cutoff = osec.get('main_cutoff', False)
+%% set secondary_cutoff = osec.get('secondary_cutoff', False)
+
+%% set main_projects = cvdata.open_source
+%% set secondary_projects = []
+%% if main_cutoff
+    %% set main_projects = cvdata.open_source | rejectattr('priority', '>=', main_cutoff)
+    %% set secondary_projects = cvdata.open_source | rejectattr('priority', '<', main_cutoff)
+    %% if secondary_cutoff
+        %% set secondary_projects = secondary_projects | rejectattr('priority', '>=', secondary_cutoff)
+    %% endif
+%% endif
+
+%% for project in slice_values(main_projects, show_main_projects)
 \textbf{%
 %% if project.url
-\href{\VAR{project.url}}{\VAR{project.project}}%
+\href{\VAR{latex_escape(project.url)}}{\VAR{project.project}}%
 %% else
 \VAR{project.project}%
 %% endif
@@ -138,6 +152,20 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
 \vspace{3pt}
 %% endif
 %% endfor
+
+%% if show_secondary_projects and secondary_projects
+    \textbf{Other Contributions:}\\
+    %% for project in slice_values(secondary_projects, show_secondary_projects)
+        \textbf{%
+        %% if project.url
+            \href{\VAR{latex_escape(project.url)}}{\VAR{project.project}}%
+        %% else
+            \VAR{project.project}%
+        %% endif
+        }, \textit{\VAR{project.role}}
+
+    %% endfor
+%% endif
 \end{multicols}
 \BLOCK{endif}
 \BLOCK{endwith}
