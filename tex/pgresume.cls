@@ -30,6 +30,12 @@ headsep=0.25cm]{geometry}
     }%
 }}
 
+\newcommand{\githublink}[1]{\href{https://github.com/#1}{%
+        \raisebox{-1.5pt}{%
+        \includegraphics[height=9pt]{images/github-icon.pdf}} %
+        \textsb{#1}%
+}}
+
 %%%%%%%%%
 % Set up header
 \RequirePackage{fancyhdr}
@@ -38,6 +44,7 @@ headsep=0.25cm]{geometry}
 \RequirePackage{xcolor}
 \RequirePackage{enumitem}
 \RequirePackage{graphicx}
+\RequirePackage{etoolbox}
 
 \AtBeginDocument{%
 %%%%%%%%
@@ -45,8 +52,12 @@ headsep=0.25cm]{geometry}
 \providecommand{\authoremail}{}
 \providecommand{\authorphone}{}
 \providecommand{\authorwebsite}{}
+\providecommand{\authorgithub}{}
 
 \definecolor{linkcolor}{RGB}{26,65,130}
+\newcommand{\oneortwodot}[2]{
+    #1 \textperiodcentered{} #2
+}
 
 \hypersetup{%
     urlcolor=linkcolor, %
@@ -63,10 +74,11 @@ headsep=0.25cm]{geometry}
 \fancyhf{}
 \fancyhead[L]{\fontsize{26pt}{26pt}\selectfont\textbf{\@author}\normalfont}
 \fancyhead[R]{
-    {\hypersetup{urlcolor=black,urlbordercolor=black}
+    {\hypersetup{urlcolor=black,urlbordercolor=black,pdfborderstyle={}}
+        \normalfont
     \begin{tabular}{r}
-        \authorphone{} \textperiodcentered\ \authoremail{} \\
-        \authorwebsite{}
+        \oneortwodot{\authorphone{}}{\authoremail{}} \\
+        \oneortwodot{\githublink{\authorgithub{}}}{\authorwebsite{}}
     \end{tabular}
     }
 }
