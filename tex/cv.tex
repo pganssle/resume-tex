@@ -1,0 +1,200 @@
+\documentclass[ocgcolorlinks]{pgresume}
+
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{multicol}
+
+\urlstyle{same}
+\newcommand*{\email}[1]{\href{mailto:#1}{\nolinkurl{#1}} }
+
+
+\newcommand\hyph{-\penalty0\hskip0pt\relax}
+
+%--------------------%
+%   Author metadata
+\author{\VAR{metadata.author}}
+\newcommand{\authoremail}[0]{\email{\VAR{metadata.email}}}
+\newcommand{\authorwebsite}[0]{\url{\VAR{metadata.website}}}
+\newcommand{\authorphone}[0]{\VAR{metadata.phone}}
+
+
+\begin{document}
+
+%% set show_languages=False
+%% set show_libraries=True
+
+\BLOCK{if cvdata.skills}
+\section{Technical Skills}
+\vspace{-\baselineskip}
+\begin{multicols}{2}
+\textbf{Programming Languages:}\\
+\VAR{', '.join(cvdata.skills["Programming Languages"])}
+\vfill
+%% if show_languages
+\textbf{Languages:}\\
+\VAR{', '.join(cvdata.skills["Languages"])}
+%% endif
+%% if show_libraries
+\textbf{Libraries:}\\
+%% for library in cvdata.skills['Libraries'][0:6]
+\texttt{\VAR{library}}%
+%% if not loop.last
+, %
+%%endif
+%% endfor
+%% endif
+\columnbreak
+
+\textbf{Programs:}
+\vspace{-\baselineskip}
+\begin{multicols}{2}
+    \begin{itemize}
+        %% for program in cvdata.skills["Programs"]
+        \item \VAR{program}
+        %% endfor
+    \end{itemize}
+\end{multicols}
+\end{multicols}
+\BLOCK{endif}
+
+\BLOCK{if cvdata.education}
+\section{Education}
+\BLOCK{for degree in cvdata.education}
+\textbf{\VAR{degree.degree}} \hfill \textsb{\VAR{degree.date}}\\
+\textit{\VAR{degree.institution}}\\
+%% if degree.thesis
+Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
+    %% if degree.thesis.pdf
+        \textperiodcentered{} \pdflink{\VAR{degree.thesis.pdf.replace("%", "\\%")}}%
+    %% endif
+%% endif
+%% if not loop.last
+\vspace{3pt}
+\newline
+%% endif
+\BLOCK{endfor}
+\BLOCK{endif}
+
+%% if cvdata.work_experience
+\section{Work Experience}
+%% for job in cvdata.work_experience
+\textbf{\VAR{job.title}}%
+    \BLOCK{if job.department}, \VAR{job.department}\BLOCK{endif}%
+    , \VAR{job.company} \hfill %
+    \textsb{\VAR{job.date_start.strftime("%b %Y")} -- %
+    \VAR{job.date_end.strftime("%b %Y") if job.date_end else "Present"}}
+
+\BLOCK{if job.advisor}
+\underline{Advisor:} \VAR{job.advisor}
+\BLOCK{endif}%
+\begin{itemize}
+    %% for detail in job.details
+    \item \VAR{detail.replace('-', '\hyph{}')}
+    %% endfor
+\end{itemize}
+%% if not loop.last
+\vspace{2pt}
+%% endif
+%% endfor
+%% endif
+
+%% if cvdata.open_source
+\vspace{\baselineskip}
+\section{Open Source}
+\vspace{-\baselineskip}
+\begin{multicols}{2}
+%% for project in cvdata.open_source
+\textbf{%
+%% if project.url
+\href{\VAR{project.url}}{\VAR{project.project}}%
+%% else
+\VAR{project.project}%
+%% endif
+}, \textit{\VAR{project.role}}\newline
+\VAR{project.description}
+
+%% if not loop.last
+\vspace{3pt}
+%% endif
+%% endfor
+\end{multicols}
+%% endif
+
+%% set talk_instances = False
+%% set show_publications = True and cvdata.publications
+%% set show_talks = True and cvdata.talks
+
+%% if show_publications or show_talks
+%% if show_publications and show_talks
+\section{Selected Papers and Presentations}
+%% elif show_publications
+\section{Selected Publications}
+%% else
+\section{Selected Presentations}
+%%endif
+%% if show_publications
+\textbf{Publications:} \\
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{#1}}
+\vspace{-\baselineskip}
+\begin{itemize}
+%% for paper in cvdata.publications[0:1]
+    \item %
+    %% for author in paper.authors
+        %% if author in metadata.author_names
+            \underline{\VAR{author}}%
+        %% else
+            \VAR{author}%
+        %% endif
+        , %
+    %% endfor
+    ``\VAR{paper.title}'', \textit{\VAR{paper.publication}}%
+    %% if paper.cover
+        , %
+        %% if paper.cover_url
+            \href{\VAR{paper.cover_url}}{\VAR{paper.cover}}%
+        %% else
+            \textbf{\VAR{paper.cover}}
+        %% endif
+    %% endif
+    \BLOCK{if paper.issue}, \VAR{paper.issue}\BLOCK{endif}%
+    \BLOCK{if paper.year}, \textbf{\VAR{paper.year}}\BLOCK{endif}%
+    \BLOCK{if paper.pages}, \VAR{paper.pages}\BLOCK{endif}%
+    \BLOCK{if paper.doi}, \doi{\VAR{paper.doi}}\BLOCK{endif}%
+    \BLOCK{if paper.pdf}\textperiodcentered{} \pdflink{\VAR{paper.pdf}}\BLOCK{endif}%
+%% endfor
+\end{itemize}
+\vspace{5pt}
+%% endif
+
+%% if show_talks
+\textbf{Talks}:\\
+\vspace{-\baselineskip}
+\begin{itemize}
+%% for talk in cvdata.talks[0:4]
+    \item %
+        ``\VAR{talk.title}''%
+        %% if talk.instances and talk_instances
+        \begin{itemize}
+            %% for instance in talk.instances
+                %% set name, location = get_event_details(instance)
+                \item \textsb{\VAR{name}}, \VAR{instance.date.strftime("%B %d, %Y")}
+            %% endfor
+        \end{itemize}
+        %% else
+            %% if talk.instances
+                %% set name, location = get_event_details(talk.instances[0])
+                %% set date = talk.instances[0].date
+            %% else
+                %% set name, location = get_event_details(talk)
+                %% set date = talk.date
+            %% endif
+            , \textsb{\VAR{name}}, \VAR{date.strftime("%B %d, %Y")}
+        %% endif
+%% endfor
+\end{itemize}
+%% endif
+
+%%endif
+
+\end{document}
