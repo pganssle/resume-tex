@@ -123,8 +123,6 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
 \BLOCK{if show}
 \vspace{\baselineskip}
 \section{Open Source}
-\vspace{-\baselineskip}
-\begin{multicols}{2}
 %% set show_main_projects = osec.get('show_main_projects', True)
 %% set show_secondary_projects = osec.get('show_secondary_projects', True)
 %% set main_cutoff = osec.get('main_cutoff', False)
@@ -140,6 +138,9 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
     %% endif
 %% endif
 
+{
+\vspace{-\baselineskip}
+\begin{multicols}{2}
 %% for project in slice_values(main_projects, show_main_projects)
 \textbf{%
 %% if project.url
@@ -169,6 +170,7 @@ Thesis: \href{\VAR{degree.thesis.link}}{\VAR{degree.thesis.text}}%
     %% endfor
 %% endif
 \end{multicols}
+}
 \BLOCK{endif}
 \BLOCK{endwith}
 
